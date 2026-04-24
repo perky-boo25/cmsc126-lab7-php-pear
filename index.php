@@ -13,11 +13,11 @@
   // shows the feedback after redirect from insert.php
   if (!empty($_GET['status'])) {
     if ($_GET['status'] === 'success') {
-      echo '<div class="msg success">&#10004; Student registered successfully!</div>';
+      echo '<div class="msg success">Student registered successfully!</div>';
     } elseif ($_GET['status'] === 'duplicate_email') {
-      echo '<div class="msg error">&#10008; That email is already registered.</div>';
+      echo '<div class="msg error">That email is already registered.</div>';
     } else {
-      echo '<div class="msg error">&#10008; Something went wrong. Please try again.</div>';
+      echo '<div class="msg error">Something went wrong. Please try again.</div>';
     }
   }
   ?>
@@ -28,19 +28,19 @@
     <table>
       <tr>
         <td class="tlabel">Name</td>
-        <td><input type="text" name="name" maxlength="40" required></td>
+        <td><input type="text" name="name" maxlength="40" placeholder="Juan J. dela Cruz" required></td>
       </tr>
       <tr>
         <td class="tlabel">Age</td>
-        <td><input type="number" name="age" min="0" max="99" required></td>
+        <td><input type="number" name="age" min="0" max="99" placeholder="0-99" required></td>
       </tr>
       <tr>
         <td class="tlabel">Email</td>
-        <td><input type="email" name="email" maxlength="40" required></td>
+        <td><input type="email" name="email" maxlength="40" placeholder="jjdelacruz@up.edu.ph" required></td>
       </tr>
       <tr>
         <td class="tlabel">Course</td>
-        <td><input type="text" name="course" maxlength="40" required></td>
+        <td><input type="text" name="course" maxlength="40" placeholder="BS Computer Science" required></td>
       </tr>
       <tr>
         <td class="tlabel">Year Level</td>
