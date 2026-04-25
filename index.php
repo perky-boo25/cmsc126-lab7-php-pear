@@ -87,7 +87,7 @@
   </form>
 
 <!--TODO: Update the info, add filename inside quotations in form action -->
-  <form action="" method="get" style="display:inline;">
+  <form action="edit.php" method="get" stsyle="display:inline;">
     <input type="hidden" name="student_id" id="update_id">
     <input type="submit" value="Update" onclick="document.getElementById('update_id').value = document.getElementById('student_id_input').value">
   </form>
