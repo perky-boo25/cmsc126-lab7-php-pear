@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Registration</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Student Registration</h1>
 
   <?php
+  include 'DBConnector.php';
+
 
   // shows the feedback after redirect from insert.php
   if (!empty($_GET['status'])) {
@@ -20,7 +23,19 @@
       echo '<div class="msg error">Something went wrong. Please try again.</div>';
     }
   }
-  ?>
+  
+  // fetch all students for the table display
+  $all_students = null;
+  $all_sql      = "SELECT s.*, sf.graduation_status, sf.image_path
+                  FROM `students` s
+                  LEFT JOIN `student_files` sf ON s.id = sf.student_id;";
+  $all_result   = $conn->query($all_sql);
+
+  if ($all_result && $all_result->num_rows > 0) {
+      // fetch all rows into an array
+      $all_students = $all_result->fetch_all(MYSQLI_ASSOC);
+  }
+    ?>
 
   <br>
   <h3>New Student:</h3>
@@ -75,19 +90,27 @@
       </tr>
     </table>
   </form>
+
+  <div class="records">
   <h2>Record Management</h2>
   <p><b>Look Up by Student ID</b></p>
 
   <input type="text" id="student_id_input" placeholder="Enter Student ID">
 
   <!--TODO: Search function, add filename inside quotations in form action -->
-  <form action="search.php" method="get" style="display:inline;">
+  <form action="index.php" method="get" style="display:inline;">
     <input type="hidden" name="student_id" id="search_id">
-    <input type="submit" value="Search" onclick="document.getElementById('search_id').value = document.getElementById('student_id_input').value">
+     <input type="submit" value="Search" onclick="
+     if (document.getElementById('student_id_input').value.trim() === '') {
+      alert('Please enter a Student ID.');
+      return false;
+    }
+    document.getElementById('search_id').value = document.getElementById('student_id_input').value;
+  ">
   </form>
 
 <!--TODO: Update the info, add filename inside quotations in form action -->
-  <form action="edit.php" method="get" stsyle="display:inline;">
+  <form action="edit.php" method="get" style="display:inline;">
     <input type="hidden" name="student_id" id="update_id">
     <input type="submit" value="Update" onclick="document.getElementById('update_id').value = document.getElementById('student_id_input').value">
   </form>
@@ -96,5 +119,49 @@
     <input type="hidden" name="student_id" id="delete_id">
     <input type="submit" value="Delete" onclick="document.getElementById('delete_id').value = document.getElementById('student_id_input').value">
   </form>
+</div>
+<a href = "index.php"> ← Back </a>
+<div id="all-students">
+
+
+<?php if (isset($_GET['student_id']) && $_GET['student_id'] !== ''): ?>
+
+  <!-- search result only, all students hidden -->
+  <?php include 'search.php'; ?>
+
+<?php else: ?>
+
+  <!-- no search made, show all students -->
+  <h3>All Students:</h3>
+
+  <?php if ($all_students): ?>
+    <div class="card-container">
+      <?php foreach ($all_students as $row): ?>
+        <div class="student-card">
+          
+          <div class="card-image">
+            <?php if (!empty($row['image_path'])): ?>
+              <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Profile">
+            <?php else: ?>
+              <img src="no_image.png" alt="No Image">
+            <?php endif; ?>
+          </div>
+
+          <div class="card-info">
+            <h3><?= htmlspecialchars($row['name']) ?></h3>
+            <p><strong>ID:</strong> <?= $row['id'] ?></p>
+          </div>
+
+        </div>
+      <?php endforeach; ?>
+    </div>
+
+  <?php else: ?>
+    <div class="msg error">No students registered yet.</div>
+  <?php endif; ?>
+
+<?php endif; ?>
+
+</div>
 </body>
 </html>

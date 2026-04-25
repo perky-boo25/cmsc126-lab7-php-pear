@@ -14,7 +14,7 @@ $graduation_status         = $_POST['graduation_status'];
 $image_path = $_POST['existing_image'];
 
 if (!empty($_FILES['image']['name'])) {
-    $filename   = uniqid('img_', true) . '_' / basename ($_FILES['image']['name']);
+    $filename   = uniqid('img_', true) . '_' . basename ($_FILES['image']['name']);
     $upload_dir = 'uploads/';
 
     if (!is_dir($upload_dir)) {
@@ -31,7 +31,7 @@ $sql = "UPDATE `students`
             `course`='$course', `year_level`='$year_level'
         WHERE `id`='$student_id'";
 
-if (conn->query($sql) === TRUE) {
+if ($conn->query($sql) === TRUE) {
 
     // update student_files table
     $query = "UPDATE `student_files`

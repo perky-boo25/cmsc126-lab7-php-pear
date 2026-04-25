@@ -5,14 +5,14 @@ $student_id = $_GET['student_id'];
 
 // join tables to get all data
 $sql = "SELECT s.*, sf.graduation_status, sf.image_path
-        FROM students s
-        JOIN students_files sf ON s.id = sf.student_id
+        FROM `students` s
+        JOIN `student_files` sf ON s.id = sf.student_id
         WHERE s.id = '$student_id'";
 
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-if (!row) {
+if (!$row) {
     die("No student found with that ID.");
 }
 $conn->close();
@@ -43,27 +43,27 @@ $conn->close();
         <table>
             <tr>
                 <td>Name</td>
-                <td><input type = "text" name = "name" maxlength = "40" value = "<? htmlspecialchars($row['name']) ?>" required></td>
+                <td><input type = "text" name = "name" maxlength = "40" value = "<?= htmlspecialchars($row['name']) ?>" required></td>
             </tr>
             <tr>
                 <td>Age</td>
-                <td><input type = "number" name = "age" min = "0" max = "99" value = "<? $row['age'] ?>" required></td>
+                <td><input type = "number" name = "age" min = "0" max = "99" value = "<?= $row['age'] ?>" required></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type = "email" name = "email" maxlength = "40" value = "<? htmlspecialchars($row['email']) ?>" required></td>
+                <td><input type = "email" name = "email" maxlength = "40" value = "<?= htmlspecialchars($row['email']) ?>" required></td>
             </tr>
             <tr>
                 <td>Course</td>
-                <td><input type = "text" name = "course" maxlength = "40" value = "<? htmlspecialchars($row['course']) ?>" required></td>
+                <td><input type = "text" name = "course" maxlength = "40" value = "<?= htmlspecialchars($row['course']) ?>" required></td>
             </tr>
             <tr>
                 <td> Year Level </td>
                 <td>
                     <select name = "year_level" required>
                         <?php for ($y = 1; $y <= 4; $y++): ?>
-                            <option value = "<?= $y ?>" <?+ $row['year_level'] == $y ? 'selected' : '' ?>>
-                                <?+ $y ?>
+                            <option value = "<?= $y ?>" <?=+ $row['year_level'] == $y ? 'selected' : '' ?>>
+                                <?= + $y ?>
                             </option>
                         <?php endfor; ?>
                     </select>
@@ -72,8 +72,8 @@ $conn->close();
             <tr>
                 <td> Graduating? </td>
                 <td>
-                    <input type = "radio" name - "graduation_status" value = "1" <?+ row['graduation_status'] == 1 ? 'checked' : '' ?>> Yes <br>
-                    <input type = "radio" name - "graduation_status" value = "0" <?+ row['graduation_status'] == 0 ? 'checked' : '' ?>> No
+                    <input type = "radio" name = "graduation_status" value = "1" <?= + $row['graduation_status'] == 1 ? 'checked' : '' ?>> Yes <br>
+                    <input type = "radio" name = "graduation_status" value = "0" <?= + $row['graduation_status'] == 0 ? 'checked' : '' ?>> No
                 </td>
             </tr>
             <tr>
@@ -84,8 +84,16 @@ $conn->close();
                         <small> Current image. Upload a new one to replace it. </small> <br>
                     <?php endif; ?>
                     <input type = "file" name = "image" accept = ".jpg, .jpeg, .png, .gof, .webp">
+                    <input type="hidden" name="existing_image" value="<?= htmlspecialchars($row['image_path']) ?>">
                 </td>
             </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <br>
+                    <input type="submit" value="Update Student">
+                </td>
+                </tr>
         </table>
     </form>
 
