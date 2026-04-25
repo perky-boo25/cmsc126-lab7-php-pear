@@ -23,6 +23,7 @@ $conn->close();
 <head>
   <meta charset = "UTF-8">
   <title>Edit Student</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1> Edit Student </h1>

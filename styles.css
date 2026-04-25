@@ -1,0 +1,282 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --maroon: #7b1131;
+  --gold: #f0a500;
+  --green: #2d6b4a;
+  --ink: #111;
+  --muted: #555;
+  --border: #ddd;
+  --bg: #f5f5f5;
+}
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 24px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* headings */
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--maroon);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--maroon);
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* feedback messages */
+
+.msg {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.msg.success,
+.msg_success {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  background: #eaf4ee;
+  color: var(--green);
+}
+
+.msg.error,
+.msg_error {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  background: #fbeaee;
+  color: var(--maroon);
+}
+
+/* form table */
+
+form table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 500px;
+}
+
+form table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+form table td {
+  padding: 8px 0;
+  vertical-align: middle;
+}
+
+td.tlabel,
+form table td:first-child {
+  width: 120px;
+  font-size: 13px;
+  color: var(--muted);
+  padding-right: 12px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus {
+  border-color: var(--maroon);
+}
+
+input[type="radio"] {
+  margin-right: 4px;
+  accent-color: var(--maroon);
+}
+
+input[type="file"] {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* current profile image preview on edit page */
+
+form img {
+  display: block;
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+form small {
+  font-size: 11px;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* submit button */
+
+input[type="submit"] {
+  background: var(--maroon);
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #6a0e29;
+}
+
+/* record management panel */
+
+.records {
+  margin-top: 28px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+/* side by side layout */
+
+.records {
+  min-width: 280px;
+}
+
+.records p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.records input[type="text"] {
+  width: auto;
+  min-width: 180px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.records input[type="submit"] {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid #ccc;
+  padding: 5px 12px;
+  margin-right: 4px;
+}
+
+.records input[type="submit"]:hover {
+  background: #f0f0f0;
+}
+
+/* back link */
+
+a {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ink);
+}
+
+/* student cards */
+
+#all-students {
+  margin-top: 24px;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.student-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.card-image {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #eee;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+}
+
+.card-info h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-info p {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* searched student card */
+
+#all-students > .student-card {
+  max-width: 250px;
+}
