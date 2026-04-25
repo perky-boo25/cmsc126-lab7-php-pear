@@ -38,7 +38,7 @@ $conn->close();
     <form action = "update.php" method = "post" enctype = "multipart/form-data">
 
         <!--pass student ID thru-->
-        <input type = "hidden" name = "student_id" value = "<?= $row['image_path'] ?>">
+        <input type = "hidden" name = "student_id" value = "<?= $row['id'] ?>">
 
         <table>
             <tr>
@@ -62,8 +62,8 @@ $conn->close();
                 <td>
                     <select name = "year_level" required>
                         <?php for ($y = 1; $y <= 4; $y++): ?>
-                            <option value = "<?= $y ?>" <?=+ $row['year_level'] == $y ? 'selected' : '' ?>>
-                                <?= + $y ?>
+                            <option value = "<?= $y ?>" <?= $row['year_level'] == $y ? 'selected' : '' ?>>
+                                <?= $y ?>
                             </option>
                         <?php endfor; ?>
                     </select>
@@ -83,7 +83,7 @@ $conn->close();
                         <img src = "<?= $row['image_path'] ?>" width = "100"> <br>
                         <small> Current image. Upload a new one to replace it. </small> <br>
                     <?php endif; ?>
-                    <input type = "file" name = "image" accept = ".jpg, .jpeg, .png, .gof, .webp">
+                    <input type = "file" name = "image" accept = ".jpg, .jpeg, .png, .gif, .webp">
                     <input type="hidden" name="existing_image" value="<?= htmlspecialchars($row['image_path']) ?>">
                 </td>
             </tr>
